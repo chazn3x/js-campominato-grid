@@ -1,5 +1,38 @@
+/* commons */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+/* body */
+body {
+    position: relative;
+    height: 100vh;
+    background: rgb(4,22,50);
+}
+.container {
+    border: 1px solid white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* game */
+#grid {
+    display: flex;
+    flex-direction: column;
+}
+.row {
+    display: flex;
+}
+/* squares */
+.square {
+    width: 70px;
+    height: 70px;
+    border: 1px solid white;
+}
+.clicked {
+    background: turquoise;
 }

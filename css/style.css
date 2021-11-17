@@ -3,6 +3,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 /* body */
@@ -26,13 +27,25 @@ body {
 }
 .row {
     display: flex;
+    border-bottom: .5px solid rgba(255,255,255,0.2);
+}
+.col {
+    border-left: .5px solid rgba(255,255,255,0.2);
 }
 /* squares */
 .square {
     width: 70px;
     height: 70px;
-    border: 1px solid white;
+    color: white;
+    line-height: 70px;
+    text-align: center;
 }
 .clicked {
     background: turquoise;
+}
+.not-clicked {
+    opacity: 0;
+}
+.bomb {
+    background: red;
 }

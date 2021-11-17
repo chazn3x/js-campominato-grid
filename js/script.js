@@ -137,7 +137,7 @@ function addClick (num) {
 
 // variabli
 let gridDim = 0;
-let level = parseInt(prompt("Livello")); // prova inserimento difficoltà
+let level = parseInt(prompt("Livello: 0, 1 o 2")); // prova inserimento difficoltà
 switch (level) { // dimensioni griglia dinamica con difficoltà
     case 0:
         gridDim = 10;

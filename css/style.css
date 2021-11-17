@@ -37,8 +37,9 @@ body {
     width: 70px;
     height: 70px;
     color: white;
-    line-height: 70px;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .clicked {
     background: turquoise;

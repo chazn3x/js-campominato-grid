@@ -23,7 +23,7 @@ function addBombs(num) {
     let randomArray = [];
     while (randomArray.length < num) { // sviluppo numeri random fino al numero di bombe
         const totalSquares = gridDim * gridDim; // numero di quadrati in totale
-        let randomNum = Math.floor(Math.random() * totalSquares) + 1; // numero casuale
+        let randomNum = Math.floor(Math.random() * totalSquares); // numero casuale
         if (randomArray.indexOf(randomNum) == -1) { // se il numero casuale non è presente nell'array
             randomArray.push(randomNum) // inserimento numero casuale nell'array
         }
@@ -31,8 +31,9 @@ function addBombs(num) {
     // ciclo per aggiungere le bombe
     const squares = document.getElementsByClassName("square"); // selezione di tutti i quadrati
     for (let i = 0; i < num; i++) {
-        squares[randomArray[i]].classList.add("bomb");
-        squares[randomArray[i]].innerHTML += `${bombHTML}`;
+        let j = randomArray[i];
+        squares[j].classList.add("bomb");
+        squares[j].innerHTML += `${bombHTML}`;
         // squares[randomArray[i]].classList.remove("not-clicked"); // debug****************************
     }
 }
@@ -50,51 +51,7 @@ function addClick (num) {
     
     // controllo intorno ai quadrati
     function aroundCheck(div) {
-        // const up = a - 1;
-        // const right = b + 1;
-        // const down = a + 1;
-        // const left = b - 1;
         let bombsNum = 0;
-        // if (square(up, b) != null) {
-        //     if (square(up, b).innerHTML == "" + up + b + "" + "<span>bomba</span>") {
-        //         bombsNum ++;
-        //     }
-        // }
-        // if (square(up, right) != null) {
-        //     if (square(up, right).innerHTML == "" + up + right + "" + "<span>bomba</span>") {
-        //         bombsNum ++;
-        //     }
-        // }
-        // if (square(a, right) != null) {
-        //     if (square(a, right).innerHTML == "" + a + right + "" + "<span>bomba</span>") {
-        //         bombsNum ++;
-        //     }
-        // }
-        // if (square(down, right) != null) {
-        //     if (square(down, right).innerHTML == "" + down + right + "" + "<span>bomba</span>") {
-        //         bombsNum ++;
-        //     }
-        // }
-        // if (square(down, b) != null) {
-        //     if (square(down, b).innerHTML == "" + down + b + "" + "<span>bomba</span>") {
-        //         bombsNum ++;
-        //     }
-        // }
-        // if (square(down, left) != null) {
-        //     if (square(down, left).innerHTML == "" + down + left + "" + "<span>bomba</span>") {
-        //         bombsNum ++;
-        //     }
-        // }
-        // if (square(a, left) != null) {
-        //     if (square(a, left).innerHTML == "" + a + left + "" + "<span>bomba</span>") {
-        //         bombsNum ++;
-        //     }
-        // }
-        // if (square(up, left) != null) {
-        //     if (square(up, left).innerHTML == "" + up + left + "" + "<span>bomba</span>") {
-        //         bombsNum ++;
-        //     }
-        // }
         let a = parseInt(div.querySelector(".x").innerHTML);
         console.log(a);
         let b = parseInt(div.querySelector(".y").innerHTML);

@@ -10,7 +10,7 @@ function createGrid(num) {
             colHTML.className = "col col-" + col; // classe dinamica colonne
             const squareHTML = document.createElement("div"); // creazione div quadrato 
             squareHTML.className = "square not-clicked " + squareClass(row, col); // classe dinamica quadrati
-            squareHTML.innerHTML = `${row}${col}`;
+            squareHTML.innerHTML = `<span class="x">${row}</span><span class="y">${col}</span>`;
             colHTML.append(squareHTML); // inserimento quadrato in colonna
             rowHTML.append(colHTML); // inserimento colonna in riga
         }
@@ -32,7 +32,7 @@ function addBombs(num) {
     const squares = document.getElementsByClassName("square"); // selezione di tutti i quadrati
     for (let i = 0; i < num; i++) {
         squares[randomArray[i]].classList.add("bomb");
-        squares[randomArray[i]].innerHTML = "<span>bomba</span>";
+        squares[randomArray[i]].innerHTML += `${bombHTML}`;
         // squares[randomArray[i]].classList.remove("not-clicked"); // debug****************************
     }
 }
@@ -95,14 +95,15 @@ function addClick (num) {
         //         bombsNum ++;
         //     }
         // }
-        let a = parseInt(div.innerHTML[0]);
-        let b = parseInt(div.innerHTML[1]);
+        let a = parseInt(div.querySelector(".x").innerHTML);
+        console.log(a);
+        let b = parseInt(div.querySelector(".y").innerHTML);
         let r = a - 1;
         for (let i = 0; i < 3; i++) {
             let c = b - 1;
             for (let j = 0; j < 3; j++) {
                 if (square(r, c) != null) {
-                    if (square(r, c).innerHTML == "<span>bomba</span>") {
+                    if (square(r, c).innerHTML == `<span class="x">${r}</span><span class="y">${c}</span>${bombHTML}`) {
                         bombsNum ++;
                         // div.innerHTML = bombsNum;
                     } // else if (square(c, d).innerHTML == "" + c + d + "") {
@@ -115,15 +116,44 @@ function addClick (num) {
             }
             r++;
         }
-        if (div.innerHTML == "<span>bomba</span>") {
+        console.log(square(a, b).innerHTML);
+        if (square(a, b).innerHTML == `<span class="x">${a}</span><span class="y">${b}</span>${bombHTML}`) {
             console.log("Clicked: bomba");
+            square(a, b).style.background = "red";
+            bombsArray = document.getElementsByClassName("bomb");
+            for (let i = 0; i < bombsArray.length; i++) {
+                bombsArray[i].classList.add("clicked");
+                bombsArray[i].classList.remove("not-clicked");
+            }
         } else if (bombsNum != 0) {
             console.log("Clicked: riga " + a + " colonna " + b + " con " + bombsNum + " bombe intorno");
         } else {
             console.log("Clicked: riga " + a + " colonna " + b);
         }
-        if (div.innerHTML == "" + a + b + "") {
-            div.innerHTML = bombsNum;
+        if (square(a, b).innerHTML == `<span class="x">${a}</span><span class="y">${b}</span>`) {
+            if (bombsNum != 0) {
+                square(a, b).innerHTML = bombsNum;
+            }
+            switch (bombsNum) {
+                case 0:
+                    square(a, b).style.background = "lightgrey";
+                    break;
+                case 1:
+                    square(a, b).style.color = "blue";
+                    break;
+                case 2:
+                    square(a, b).style.color = "green";
+                    break;
+                case 3:
+                    square(a, b).style.color = "red";
+                    break;
+                case 4:
+                    square(a, b).style.color = "violet";
+                    break;
+                case 5:
+                    square(a, b).style.color = "purple";
+                    break;
+            }
         }
 
         // PROVARE A SCRIVERE INTORNO ALLE BOMBE
@@ -151,9 +181,11 @@ switch (level) { // dimensioni griglia dinamica con difficoltà
 }
 let row; // contatore delle righe da utilizzare nelle classi dinamiche
 let col; // contatore delle colonne da utilizzare nelle classi dinamiche
-const bombs = 16;
+let bombs = Math.floor((gridDim * gridDim) / 4);
+console.log(bombs);
 const squareClass = (a, b) => "square" + a + "_" + b; // funzione per creare una classe dinamica da utilizzare per i quadrati
 const square = (a, b) => document.querySelector("." + squareClass(a, b)); // funzione per selezionare un quadrato con classe dinamica
+const bombHTML = `<span><i class="fas fa-bomb"></i></span>`;
 createGrid(gridDim); // funzione che crea la griglia di gioco
 addBombs(bombs); // funzione per aggiungere le bombe
 addClick(gridDim); // funzione che aggiunge il click ai quadrati

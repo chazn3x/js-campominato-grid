@@ -13,7 +13,7 @@ body {
     background: rgb(4,22,50);
 }
 .container {
-    border: 1px solid white;
+    border: .1px solid rgba(255,255,255,0.1);
     position: absolute;
     top: 50%;
     left: 50%;
@@ -27,10 +27,14 @@ body {
 }
 .row {
     display: flex;
-    border-bottom: .5px solid rgba(255,255,255,0.2);
+    border-top: .1px solid rgba(255,255,255,0.1);
 }
 .col {
-    border-left: .5px solid rgba(255,255,255,0.2);
+    border-left: .1px solid rgba(255,255,255,0.1);
+}
+.row:first-child,
+.col:first-child {
+    border: none;
 }
 /* squares */
 .square {
@@ -40,13 +44,19 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
+    font-size: 30px;
+    font-weight: 900;
 }
 .clicked {
-    background: turquoise;
+    background: rgb(15,217,119);
 }
 .not-clicked {
     opacity: 0;
 }
 .bomb {
-    background: red;
+    background: rgb(1,46,137);
+}
+.x, .y {
+    display: none;
 }
